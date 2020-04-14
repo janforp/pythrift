@@ -9,6 +9,10 @@ from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TCompactProtocol
 
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
+
 try:
     tSocket = TSocket.TSocket('localhost', 8899)
     tSocket.setTimeout(600)
@@ -21,7 +25,7 @@ try:
 
     transport.open()
 
-    person = client.getPersonByUsername("zhangsan")
+    person = client.getPersonByUsername("张三")
     print person.username
     print person.age
     print person.married
@@ -29,7 +33,7 @@ try:
     print '----------'
 
     newPerson = ttypes.Person()
-    newPerson.username = "lisi"
+    newPerson.username = "李四"
     newPerson.age = 30
     newPerson.married = True
     client.savePerson(newPerson)
